@@ -14,11 +14,16 @@ param2 = 0
 param3 = 0
 var = ""
 code = []
-temp = 0 = 3
+temp = 0 
 skip = 3
-for x in range(0,skip = 3 len(input)):
-skip = 3
+x = 0
+
+while x < len(input):
+
+    #print("x = ", x)
+    code = []
     var = str(input[x])
+    #print("Length Opcode = ", len(code))
     for m in range(len(var)):
         code.append(var[m])
 
@@ -31,75 +36,76 @@ skip = 3
         a = code[4]
         if a[0] == "0":
             a = a[1]
+
+    #print("Length Opcode = ", len(code))    
+    #print("Code = ", code)
+
     
     if len(code) == 1:
         opcode = int(a)
         par1mode = 0
         par2mode = 0
         par3mode = 0
-    else:
+    elif len(code) == 5:
         opcode = int(a)
         par1mode = int(code[2])
         par2mode = int(code[1])
         par3mode = int(code[0])
     
-    print("Opcode", opcode)
-    print("Par1 Mode", par1mode)
-    print("Par2 Mode", par2mode)
-    print("Par3 Mode", par3mode)
+    #print("Opcode", opcode)
+    #print("Par1 Mode", par1mode)
+    #print("Par2 Mode", par2mode)
+    #print("Par3 Mode", par3mode)
 
     if par1mode == 0:
-        param1 = input[input[x+1]]
-    elif par1mode == 1:
         param1 = input[x+1]
+    elif par1mode == 1:
+        param1 = x+1
     else:
         print("Fail")
 
     if par2mode == 0:
-        param2 = input[input[x+2]]
-    elif par2mode == 1:
         param2 = input[x+2]
+    elif par2mode == 1:
+        param2 = x+2
     else:
         print("Fail")
 
     if par3mode == 0:
-        param3 = input[input[x+3]]
-    elif par3mode == 1:
         param3 = input[x+3]
+    elif par3mode == 1:
+        param3 = x+3
     else:
         print("Fail")
-    
-    print("Parameter 1", param1)
-    print("Parameter 2", param2)
-    print("Parameter 3", param3)
 
-    print(opcode)
+    #print("Parameter 1", param1)
+    #print("Parameter 2", param2)
+    #print("Parameter 3", param3)
 
     if opcode == 99:
         temp = 1
 
     elif opcode == 1 and opcode != 99 and temp != 1:
         input[param3] = input[param1] + input[param2]
-        skip = 3
+        skip = 4
 
     elif opcode == 2 and opcode != 99 and temp != 1:
         input[param3] = input[param1] * input[param2]
-        skip = 3
+        skip = 4
 
     elif opcode == 3 and opcode != 99 and temp != 1:
-        input[param3] = input[param1] * input[param2]
-        skip = 1
+        input[param1] = 1
+        skip = 2
 
     elif opcode == 4 and opcode != 99 and temp != 1:
-        input[param3] = input[param1] * input[param2]
-        skip = 1
+        print("Output = ", input[param1])
+        skip = 2
 
     else:
         temp = 1
     
+
     x += skip
+    skip = 0
     if temp == 1:
         break
-
-
-
